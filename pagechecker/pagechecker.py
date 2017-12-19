@@ -28,14 +28,14 @@ class PageCheckerWorker(object):
             page_result = urllib2.urlopen(self.url, timeout=1)
             content_length = len(page_result.read())
             # TODO: refactor datetime formats into a helper function
-            print "%s - %s - %s Bytes" % (datetime.fromtimestamp(timestamp).strftime('%d/%m/%y %H:%M:%S'), self.url, content_length)
+            return "%s - %s - %s Bytes" % (datetime.fromtimestamp(timestamp).strftime('%d/%m/%y %H:%M:%S'), self.url, content_length)
         except IOError as err:
-            print "%s - %s - TIMEOUT" % (datetime.fromtimestamp(timestamp).strftime('%d/%m/%y %H:%M:%S'), self.url)
+            return "%s - %s - TIMEOUT" % (datetime.fromtimestamp(timestamp).strftime('%d/%m/%y %H:%M:%S'), self.url)
 
 # py2 uses functions as thread runner, py3 uses object
 def worker_runner(worker):
     while True:
-        worker.check_page()
+        print worker.check_page()
         time_till_next_check = time() - worker.time_check_point
         sleep_time = worker.interval - time_till_next_check
         #print 'times:', worker.time_check_point, time_till_next_check, sleep_time

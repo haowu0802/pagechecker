@@ -23,7 +23,7 @@ def complex_function(argument_x, argument_y=0):
 class TestP2(unittest.TestCase):
     def test_function_meta(self):
         _, log = complex_function("dog", 100)
-        print log # for debug and show case
+        #print log # for debug and show case
         self.assertIn("Function Name", log)
         self.assertIn("Arguments", log)
         self.assertIn("Time taken", log)

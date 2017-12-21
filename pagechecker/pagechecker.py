@@ -25,7 +25,7 @@ class PageCheckerWorker(object):
         # timeout should never be longer than interval
         # if the page is expected to load longer than interval, then interval needs to be extended longer
         try:
-            page_result = urllib2.urlopen(self.url, timeout=1)
+            page_result = urllib2.urlopen(self.url, timeout=self.interval)
             content_length = len(page_result.read())
             # TODO: refactor datetime formats into a helper function
             return "%s - %s - %s Bytes" % (datetime.fromtimestamp(timestamp).strftime('%d/%m/%y %H:%M:%S'), self.url, content_length)
